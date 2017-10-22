@@ -1,0 +1,1034 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>HomeFileOrganizer</name>
+    </assembly>
+    <members>
+        <member name="F:HomeFileOrganizer.Classes.Category.Name">
+            <summary>
+            Name of category
+            </summary>
+        </member>
+        <member name="F:HomeFileOrganizer.Classes.Category.TemplatesForFile">
+            <summary>
+            Name of files, that specifies this category. Name are without system path.
+            </summary>
+        </member>
+        <member name="M:HomeFileOrganizer.Classes.Category.GetMyFileInfoForFile(System.UInt64)">
+            <summary>
+            Create MyInfoFile instance for category
+            </summary>
+            <param name="diskId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HomeFileOrganizer.Classes.Category.GetMyFileInfoForFolder(System.UInt64)">
+            <summary>
+            
+            </summary>
+            <param name="diskId"></param>
+            <returns></returns>
+        </member>
+        <member name="F:HomeFileOrganizer.Classes.Communicator.IsInformator">
+            <summary>
+            Determine, if this device is in informator role in this connection.
+            </summary>
+        </member>
+        <member name="F:HomeFileOrganizer.Classes.Communicator.requests">
+            <summary>
+            Queue of request, that will be send as soon as possible by task running <see cref="M:HomeFileOrganizer.Managers.Connections.runCommunication(HomeFileOrganizer.Classes.MyDevice)"/>
+            </summary>
+        </member>
+        <member name="P:HomeFileOrganizer.Classes.Communicator.IsNotConnected">
+            <summary>
+            Determine if underlinig socket is connected.
+            </summary>
+        </member>
+        <member name="M:HomeFileOrganizer.Classes.Communicator.#ctor(System.Net.Sockets.Socket)">
+            <summary>
+            Create instance for comunication with device on the other side of <paramref name="x"/>.
+            </summary>
+        </member>
+        <member name="M:HomeFileOrganizer.Classes.Communicator.SendLine(System.String)">
+            <summary>
+            Send line to other side of connection.
+            </summary>
+            <param name="v"></param>
+        </member>
+        <member name="M:HomeFileOrganizer.Classes.Communicator.ReciveLineAsyncWithTimeout">
+            <summary>
+            Recive line from connection in 1 sec, or exception is thrown.
+            </summary>
+            <returns></returns>
+            <exception cref="T:System.IndexOutOfRangeException">Occure when timelimit reached.</exception>
+        </member>
+        <member name="M:HomeFileOrganizer.Classes.Communicator.ReadBytes(System.Int32,System.Int32)">
+            <summary>
+            Read bytes from socket. In
+            </summary>
+            <param name="maxBytes"></param>
+            <param name="milSecTimeout"></param>
+            
+            <returns></returns>
+            <exception cref="T:System.TimeoutException">if timeout reached</exception>
+        </member>
+        <member name="M:HomeFileOrganizer.Classes.Communicator.ReciveLineAsyncWithTimeout(System.Int32)">
+            <summary>
+            Recive line from connection in limited time by <paramref name="milsec"/>.
+            </summary>
+            <returns>Line</returns>
+            <exception cref="T:System.IndexOutOfRangeException">Occure if timelimit was reached.</exception>
+        </member>
+        <member name="M:HomeFileOrganizer.Classes.Communicator.ReciveLineAsync">
+            <summary>
+            Recive line from connection.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HomeFileOrganizer.Classes.Communicator.Dispose">
+            <summary>
+            Close all resources.
+            </summary>
+        </member>
+        <member name="M:HomeFileOrganizer.Classes.Communicator.SendFile(System.IO.FileInfo)">
+            <summary>
+            Send file to the other side of connection, with application protocol. (If some problem with file occures, than "fileError" is sended)
+            </summary>
+            <param name="file">File to send</param>
+        </member>
+        <member name="M:HomeFileOrganizer.Classes.Communicator.ReadFile(System.String)">
+            <summary>
+            Read file sended in stream, and rewrite with it old file
+            </summary>
+            <exception cref="T:HomeFileOrganizer.Exceptions.ProtocolException">If wrong protocol used.</exception>
+            <exception cref="T:System.IO.FileNotFoundException">If asked device doesnt have this file</exception>
+            <exception cref="T:System.IO.EndOfStreamException">If failed to read full file</exception>
+            <exception cref="T:System.TimeoutException">If waited to long for data</exception>
+        </member>
+        <member name="M:HomeFileOrganizer.Classes.Communicator.ReadSyncFile(System.String)">
+            <summary>
+            Read file sended in stream, and rewrite with it old file
+            </summary>
+            <exception cref="T:HomeFileOrganizer.Exceptions.ProtocolException">If wrong protocol used.</exception>
+            <exception cref="T:System.IO.FileNotFoundException">If asked device doesnt have this file</exception>
+        </member>
+        <member name="M:HomeFileOrganizer.Classes.Communicator.DequeueRequest">
+            <summary>
+            Send and wait for request that was pushed to the <see cref="F:HomeFileOrganizer.Classes.Communicator.requests"/> 
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HomeFileOrganizer.Classes.Communicator.EnqueueRequestDownload(System.String,System.String,System.Boolean)">
+            <summary>
+            Downloade file from device.
+            </summary>
+            <param name="FromPath">Path of file on connected device. If <paramref name="IsHFORelative"/>=true then the path start with FileManager.PathToHFO string on connected device, otherwise the path is in program tree format ({deviceId}\{diskId}\{path relative to root folder on specified disk})</param>
+            <param name="ToHFOPath">Target where the file will be saved</param>
+            <param name="IsHFORelative">If true than FromPath is relative to HFO folder, else FromPath is systemTreePath</param>
+            <returns>Task with state WaitingToRun</returns>
+        </member>
+        <member name="M:HomeFileOrganizer.Classes.Communicator.ReciveLine">
+            <summary>
+            Recive line from device on the other side of connection.
+            </summary>
+            <returns>String in line</returns>
+        </member>
+        <member name="M:HomeFileOrganizer.Classes.HomeData.Select(System.String)">
+            <summary>
+            Select
+            </summary>
+            <param name="path">{deviceId}/{diskId}/{application tree path}</param>
+            <returns></returns>
+        </member>
+        <member name="M:HomeFileOrganizer.Classes.HomeData.AddDevice(System.String)">
+            <summary>
+            Vygeneruje id pro novy disk a prida disk do systemu
+            </summary>
+            <param name="name"></param>
+            <returns>Pridany disk</returns>
+        </member>
+        <member name="F:HomeFileOrganizer.Classes.ItemTypes.ByteItem.bytes">
+            <summary>
+            Count of bytes
+            </summary>
+        </member>
+        <member name="M:HomeFileOrganizer.Classes.ItemTypes.CounterItem.SetValue(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="o">{count}({date time})</param>
+        </member>
+        <member name="F:HomeFileOrganizer.Classes.ItemTypes.PictureItem.MaxPicSize">
+            <summary>
+            Maximum size of picture
+            </summary>
+        </member>
+        <member name="F:HomeFileOrganizer.Classes.ItemTypes.PictureItem.pictureFileName">
+            <summary>
+            Name of picture file without path.
+            </summary>
+        </member>
+        <member name="F:HomeFileOrganizer.Classes.ItemTypes.PictureItem.newPicturePath">
+            <summary>
+            Full system path to picture.
+            Or empty string if not edited.
+            </summary>
+        </member>
+        <member name="F:HomeFileOrganizer.Classes.ItemTypes.PictureItem.directory">
+            <summary>
+            Directory where is picture saved
+            </summary>
+        </member>
+        <member name="M:HomeFileOrganizer.Classes.ItemTypes.PictureItem.#ctor(System.String,System.UInt64)">
+            <param name="name">Name of item</param>
+        </member>
+        <member name="M:HomeFileOrganizer.Classes.ItemTypes.PictureItem.SetValue(System.String)">
+            <summary>
+            Name of file in ItemFiles folder
+            </summary>
+            <param name="o">Name of file in ItemFiles folder</param>
+        </member>
+        <member name="M:HomeFileOrganizer.Classes.ItemTypes.PictureItem.GetXmlSaveString">
+            <summary>
+            Get string with xml value tag in FileInfo format.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HomeFileOrganizer.Classes.ItemTypes.PictureItem.GetChangeInfoSyncString">
+            <summary>
+            
+            </summary>
+            <returns>{file extension}!{picture data}</returns>
+        </member>
+        <member name="M:HomeFileOrganizer.Classes.ItemTypes.PictureItem.ChangeInfoBySyncString(System.String,System.DateTime)">
+            <summary>
+            
+            </summary>
+            <param name="changeInfo"></param>
+            <param name="changeTime"></param>
+        </member>
+        <member name="M:HomeFileOrganizer.Classes.MyDisk.AddFile(System.String,HomeFileOrganizer.Classes.Category,HomeFileOrganizer.Managers.Synchronization)">
+            <summary>
+            
+            </summary>
+            <param name="path">start with root dir</param>
+            <param name="category"></param>
+            <returns>null if already exist</returns>
+        </member>
+        <member name="M:HomeFileOrganizer.Classes.MyDisk.RemoveFile(System.String)">
+            <summary>
+            Remove file from data tree and delete it's InfoFile
+            </summary>
+            <param name="v"></param>
+        </member>
+        <member name="M:HomeFileOrganizer.Classes.MyDisk.AddFile(System.String,HomeFileOrganizer.Classes.Category,System.String)">
+            <summary>
+            Prida soubor a vytvori fileinfo soubor, ale neprepise diskoverview soubor.
+            </summary>
+            <param name="path"></param>
+            <param name="category"></param>
+            <param name="infoFilePath"></param>
+        </member>
+        <member name="M:HomeFileOrganizer.Classes.MyDisk.GetFile(System.String)">
+            <summary>
+            Find file by path from disk.
+            </summary>
+            <param name="v"></param>
+            <returns>file instance, or null if not found</returns>
+        </member>
+        <member name="F:HomeFileOrganizer.Classes.MyFile.FilePath">
+            <summary>
+            Relative path from disk root folder to file.
+            </summary>
+        </member>
+        <member name="F:HomeFileOrganizer.Classes.MyFile.InfoFilePath">
+            <summary>
+            Relative path from HFO folder to file with information about this file.
+            </summary>
+        </member>
+        <member name="F:HomeFileOrganizer.Classes.MyFile.Folder">
+            <summary>
+            Folder that contains this file
+            </summary>
+        </member>
+        <member name="M:HomeFileOrganizer.Classes.MyFile.#ctor(HomeFileOrganizer.Classes.MyFolder)">
+            <summary>
+            Create file that is inside <paramref name="f"/>
+            </summary>
+        </member>
+        <member name="M:HomeFileOrganizer.Classes.MyFile.GetPath">
+            <summary>
+            Return my system free path strting with disk id
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HomeFileOrganizer.Classes.MyFile.HomeFileOrganizer#Classes#Interfaces#IInfoGetter#GetInfoFilePath">
+            <summary>
+            Get relative path to HFO folder
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="F:HomeFileOrganizer.Classes.MyDevice.Id">
+            <summary>
+            Id of device
+            </summary>
+        </member>
+        <member name="F:HomeFileOrganizer.Classes.MyDevice.Name">
+            <summary>
+            User defined name of device
+            </summary>
+        </member>
+        <member name="F:HomeFileOrganizer.Classes.MyDevice.Communicate">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:HomeFileOrganizer.Classes.MyDevice.SyncedTo">
+            <summary>
+            Running PC is synced to SyncedTo file on PC represented by this instance
+            </summary>
+        </member>
+        <member name="F:HomeFileOrganizer.Classes.MyDevice.RunOn">
+            <summary>
+            Pc represented by this instance is synced to RunOn file on running PC
+            </summary>
+        </member>
+        <member name="F:HomeFileOrganizer.Classes.MyDevice.disks">
+            <summary>
+            Disk located in device
+            </summary>
+        </member>
+        <member name="F:HomeFileOrganizer.Classes.MyDevice.AreDisksLoaded">
+            <summary>
+            True if device file was readed
+            </summary>
+        </member>
+        <member name="M:HomeFileOrganizer.Classes.MyDevice.LoadDisks">
+            <summary>
+            Read device file with content of disks.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HomeFileOrganizer.Classes.MyDevice.RewriteDeviceFile">
+            <summary>
+            Rewrite device file with data in disks informations.
+            Dont solve problem if disk wasnt loaded before.
+            </summary>
+        </member>
+        <member name="F:HomeFileOrganizer.Classes.MyFolder.UpperFolder">
+            <summary>
+            Previus folder.
+            Is null if root folder.
+            </summary>
+        </member>
+        <member name="F:HomeFileOrganizer.Classes.MyFolder.Path">
+            <summary>
+            Relative path from upper folder.
+            </summary>
+        </member>
+        <member name="F:HomeFileOrganizer.Classes.MyFolder.InfoFilePath">
+            <summary>
+            File with information about folder. Realtive from HFO folder.
+            Can be null, if not such file exists.
+            </summary>
+        </member>
+        <member name="M:HomeFileOrganizer.Classes.MyFolder.#ctor">
+            <summary>
+            Just for extension of this class, dont use if not nessesary.
+            </summary>
+        </member>
+        <member name="M:HomeFileOrganizer.Classes.MyFolder.GetPath">
+            <summary>
+            Return full path of folder.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HomeFileOrganizer.Classes.MyFolder.GetEnd(System.String,System.String)">
+            <summary>
+            Find end 
+            </summary>
+            <param name="relativePath">Relativ path of countinu lookup. <para>(<paramref name="fullPath"/> without this folder path)</para></param>
+            <param name="fullPath">Full path from root of disk</param>
+            <returns>null if path doesn't end in this folder(or subfolders)</returns>
+        </member>
+        <member name="F:HomeFileOrganizer.Classes.MyRootFolder.Category">
+            <summary>
+            Category of folder content. Null if not specified.
+            </summary>
+        </member>
+        <member name="M:HomeFileOrganizer.Classes.MyRootFolder.#ctor(System.String,HomeFileOrganizer.Classes.MyDisk,HomeFileOrganizer.Classes.Category)">
+            <summary>
+            Create instance of root folder.
+            </summary>
+            <param name="path">path from disk root</param>
+            <param name="dsk">disk where is this folder</param>
+            <param name="cat">Category in which is folder placed</param>
+        </member>
+        <member name="M:HomeFileOrganizer.Classes.MyInfoFile.AddGroup(System.String)">
+            <summary>
+            Create group inside this file info. If already exists, than return existig group.
+            </summary>
+            <param name="name">Group that was added.</param>
+            <returns></returns>
+        </member>
+        <member name="M:HomeFileOrganizer.Classes.MyInfoFile.AddItem(HomeFileOrganizer.Classes.Item)">
+            <summary>
+            Add item inside this file info.
+            </summary>
+            <exception cref="T:System.ArgumentException">Item already exists</exception>
+            <param name="i"></param>
+        </member>
+        <member name="M:HomeFileOrganizer.Classes.MyInfoFile.GetColumn(System.String)">
+            <summary>
+            Find value of specific item.
+            </summary>
+            <param name="name">Path to item<example>{group g1}\{group g2 inside g1}\{item inside g2} </example></param>
+            <returns>value of item or "" if not found</returns>
+        </member>
+        <member name="M:HomeFileOrganizer.Classes.MyInfoFile.GetItem(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="name"></param>
+            <returns>null if not found</returns>
+        </member>
+        <member name="M:HomeFileOrganizer.Classes.InfoGroup.AddItem(HomeFileOrganizer.Classes.Item)">
+            <summary>
+            Add item inside this file info.
+            </summary>
+            <exception cref="T:System.ArgumentException">Item already exists</exception>
+            <param name="i"></param>
+        </member>
+        <member name="M:HomeFileOrganizer.Classes.Item.GetValueControl">
+            <summary>
+            Return read only control with item value and .Tag setted to this item.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HomeFileOrganizer.Classes.Item.GetEditableControl">
+            <summary>
+            Return editable control with item value, and .Tag setted to this item.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HomeFileOrganizer.Classes.Item.SetValue(System.String)">
+            <summary>
+            Set value of item.
+            </summary>
+            <param name="o">is in invarianCulture format</param>
+        </member>
+        <member name="M:HomeFileOrganizer.Classes.Item.GetXmlSaveString">
+            <summary>
+            Get xml string of item ({left angle bracket}value name="this.Name" type="{item type}"{right angle bracket} {this.value}{xml value end}
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HomeFileOrganizer.Classes.Item.HasChanged(System.Windows.Forms.Control)">
+            <summary>
+            Determine if item has changed. And set its IsChanged field
+            </summary>
+            <param name="con"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HomeFileOrganizer.Classes.Item.GetChangeInfoSyncString">
+            <summary>
+            Get string with information about change of value, that is saved to sync file.
+            The ChangeInfoByString method shoud do same type of change if called with returned string.
+            Must be called after calling HasChanged
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HomeFileOrganizer.Classes.Item.ChangeInfoBySyncString(System.String,System.DateTime)">
+            <summary>
+            Do change that is described in string. Shoud colerate with string that this change create if called GetChangeInfoSyncString.
+            </summary>
+            <param name="changeInfo">is in invarianCulture format</param>
+        </member>
+        <member name="M:HomeFileOrganizer.Classes.Item.GetGroupPath">
+            <summary>
+            Get path thought start of group to this item and item name.
+            </summary>
+            <returns><example>{group.name}/{group.name}/.../{item.name}</example></returns>
+        </member>
+        <member name="M:HomeFileOrganizer.Classes.Parsing.ParseItem(System.String,System.String,System.Xml.XmlReader,System.UInt64)">
+            <summary>
+            
+            </summary>
+            <param name="type"></param>
+            <param name="name"></param>
+            <param name="reader"></param>
+            <param name="diskId"></param>
+            <returns></returns>
+        </member>
+        <member name="F:HomeFileOrganizer.Closer.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:HomeFileOrganizer.Closer.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:HomeFileOrganizer.Closer.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:HomeFileOrganizer.Form1.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:HomeFileOrganizer.Form1.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:HomeFileOrganizer.Form1.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:HomeFileOrganizer.Managers.Connections.ConnectionPort">
+            <summary>
+            Port that is opened for incoming connections to this instance of program.
+            </summary>
+        </member>
+        <member name="F:HomeFileOrganizer.Managers.Connections.device">
+            <summary>
+            Instance of devicethat run this instance of application
+            </summary>
+        </member>
+        <member name="M:HomeFileOrganizer.Managers.Connections.RunConnection">
+            <summary>
+            Start broadcaster, broadcast listener and connection listener.
+            </summary>
+            <returns>Task that wait for broadcaster, broadcast listener and conection listener to end.</returns>
+        </member>
+        <member name="M:HomeFileOrganizer.Managers.Connections.SetClose">
+            <summary>
+            Set information for all connection task, that they should end.
+            </summary>
+        </member>
+        <member name="M:HomeFileOrganizer.Managers.Connections.Broadcast">
+            <summary>
+            Broadcast information, that instance of application on this computer is connected to local network.
+            </summary>
+        </member>
+        <member name="M:HomeFileOrganizer.Managers.Connections.ListenBroadcast">
+            <summary>
+            Finding others devices in network, that are in relation with this application data.
+            </summary>
+        </member>
+        <member name="M:HomeFileOrganizer.Managers.Connections.ConnectingToNetwork(HomeFileOrganizer.Classes.HomeData)">
+            <summary>
+            Do all neseseary thinks to step in running network
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HomeFileOrganizer.Managers.Connections.TaskTryConnect(HomeFileOrganizer.Classes.MyDevice,System.String,System.Int32)">
+            <summary>
+            Try to connect to device<paramref name="dev"/>, that should listen on IP adress<paramref name="ip"/> and port<paramref name="port"/>.
+            </summary>
+            <returns>True if connection was established</returns>
+        </member>
+        <member name="M:HomeFileOrganizer.Managers.Connections.downLoadStartFile(HomeFileOrganizer.Classes.Communicator,HomeFileOrganizer.Classes.HomeData)">
+            <summary>
+            download files: overview,all device infos, all info files
+            </summary>
+            <param name="com">Connection manager, from with it should be downloaded/</param>
+            <param name="dat">Data in which the dowenloaded information should be loaded.</param>
+        </member>
+        <member name="M:HomeFileOrganizer.Managers.Connections.ListenConnections">
+            <summary>
+            Accept connection from other applications, and check if they are valid.
+            </summary>
+        </member>
+        <member name="M:HomeFileOrganizer.Managers.Connections.runCommunication(HomeFileOrganizer.Classes.MyDevice)">
+            <summary>
+            Run the comunication between this device and <paramref name="dev"/>.
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:HomeFileOrganizer.Managers.Searcher.Search(System.String)" -->
+        <member name="M:HomeFileOrganizer.Managers.Searcher.Filterate(HomeFileOrganizer.Managers.Operation,HomeFileOrganizer.Classes.Interfaces.IInfoGetter)">
+            <summary>
+            Determine if <paramref name="item"/> is coresponding with filre <paramref name="root"/>.
+            </summary>
+            <param name="root">Root of operation tree, that determine if <paramref name="item"/> is corresponding to searched file.</param>
+            <returns>Item if pass filter, otherwise null.</returns>
+        </member>
+        <member name="T:HomeFileOrganizer.Managers.Filter">
+            <summary>
+            Operation that compare data in infoFile with filer option.
+            </summary>
+        </member>
+        <member name="M:HomeFileOrganizer.Managers.Filter.Parse(System.String)">
+            <summary>
+            Parse filter operation.
+            </summary>
+            <param name="s">{infoPath}{comparands}{value}, do not solve '"'</param>
+            <returns></returns>
+        </member>
+        <member name="F:HomeFileOrganizer.Managers.SyncEvents.DiskAddEv.DeviceId">
+            <summary>
+            Device on which was new disk discovered
+            </summary>
+        </member>
+        <member name="P:HomeFileOrganizer.Managers.SyncEvents.FileAddEv.InfoFilePath">
+            <summary>
+            Relative path from HFO folder
+            </summary>
+        </member>
+        <member name="P:HomeFileOrganizer.Managers.SyncEvents.InfoChangeValueEv.GroupPath">
+            <summary>
+            Path through info file.
+            <example>({group.name}/)*{item.name}</example>
+            </summary>
+        </member>
+        <member name="F:HomeFileOrganizer.Managers.SyncEvents.ConfirmEvents.Xml">
+            <summary>
+            Definition of element name for Xml file.
+            </summary>
+        </member>
+        <member name="P:HomeFileOrganizer.Managers.SyncEvents.Events.Time">
+            <summary>
+            Time of event
+            </summary>
+        </member>
+        <member name="P:HomeFileOrganizer.Managers.SyncEvents.FilesEvents.DeviceId">
+            <summary>
+            Device where data was changed
+            </summary>
+        </member>
+        <member name="P:HomeFileOrganizer.Managers.SyncEvents.FilesEvents.DiskId">
+            <summary>
+            Disk where data was changed
+            </summary>
+        </member>
+        <member name="P:HomeFileOrganizer.Managers.SyncEvents.FilesEvents.Path">
+            <summary>
+            Relative path from root of disk
+            </summary>
+        </member>
+        <member name="P:HomeFileOrganizer.Managers.SyncEvents.InfoChangeEvents.Path">
+            <summary>
+            Relative path to info file through my file system tree
+            <example>{deviceId}/{diskId}/({folder}/)*{file}</example>
+            </summary>
+        </member>
+        <member name="M:HomeFileOrganizer.Managers.SyncEvents.InfoChangeEvents.#ctor(System.Xml.XmlReader)">
+            <summary>
+            
+            </summary>
+            <param name="time"></param>
+            <param name="path">Relative path to info file through my file system tree</param>
+        </member>
+        <member name="M:HomeFileOrganizer.Managers.SyncEvents.InfoChangeEvents.#ctor(System.DateTime,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="time"></param>
+            <param name="path">Relative path to info file through my file system tree</param>
+        </member>
+        <member name="F:HomeFileOrganizer.Managers.Synchronization.MaxEventsCount">
+            <summary>
+            Count of events in eventsToWrite, that will invoke their write to sync file.
+            </summary>
+        </member>
+        <member name="F:HomeFileOrganizer.Managers.Synchronization.eventsToWrite">
+            <summary>
+            !!Is also locked by this.semLock
+            </summary>
+        </member>
+        <member name="F:HomeFileOrganizer.Managers.Synchronization.semLock">
+            <summary>
+            Thread is in readmode, if is trying modifi eventsToWrite collection.
+            Thread is in write mode, if is trying to replace whole eventsToWrite collection with new empty instance.
+            </summary>
+        </member>
+        <member name="F:HomeFileOrganizer.Managers.Synchronization.syncWriter">
+            <summary>
+            Task that is waiting at semLock for write sync file
+            </summary>
+        </member>
+        <member name="P:HomeFileOrganizer.Managers.Synchronization.lastVersion">
+            <summary>
+            Name of last file created by sync manager.
+            </summary>
+        </member>
+        <member name="M:HomeFileOrganizer.Managers.Synchronization.#ctor">
+            <summary>
+            Prida do lokanich zmen novy event
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:HomeFileOrganizer.Managers.Synchronization.AddGeneratedSyncEvent(HomeFileOrganizer.Managers.SyncEvents.Events)">
+            <summary>
+            Add event<paramref name="e"/> that was created by user using this device to sync manager.
+            </summary>
+        </member>
+        <member name="M:HomeFileOrganizer.Managers.Synchronization.WriteSyncFile">
+            <summary>
+            Create new sync file contataining, latest events.
+            </summary>
+            <returns>Running task which will be done when writing is finished</returns>
+        </member>
+        <member name="M:HomeFileOrganizer.Managers.Synchronization.GetNextSyncFile(System.String)">
+            <summary>
+            Get sync file, htat follows after the <paramref name="v"/> file. If no such file, than return null. If <paramref name="v"/> is empty string, than retunt the first sync file.
+            </summary>
+            <param name="v"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HomeFileOrganizer.Managers.Synchronization.Dispose">
+            <summary>
+            Finish work of sync manager for secure dipose of instance.
+            Do not add new events to sync manager, if this method is called.
+            </summary>
+        </member>
+        <member name="F:HomeFileOrganizer.Managers.FileManager.PathToHFOFolder">
+            <summary>
+            System path to directory, where all data are saved.
+            </summary>
+        </member>
+        <member name="P:HomeFileOrganizer.Managers.FileManager.dataHolder">
+            <summary>
+            Instance that contain all program data.
+            </summary>
+        </member>
+        <member name="F:HomeFileOrganizer.Managers.FileManager.viewedFile">
+            <summary>
+            File that is currently slected in GUI.
+            </summary>
+        </member>
+        <member name="P:HomeFileOrganizer.Managers.FileManager.syncManager">
+            <summary>
+            Class that manage synchronization.
+            </summary>
+        </member>
+        <member name="M:HomeFileOrganizer.Managers.FileManager.#ctor(HomeFileOrganizer.Classes.HomeData,System.Boolean)">
+            <summary>
+            Create new instance of FileManger, whre datHolder is set to <paramref name="data"/>.
+            </summary>
+            <param name="noSyncManager">Detemine if synchronization manager shoud be created. If true the <see cref="P:HomeFileOrganizer.Managers.FileManager.syncManager"/> is null.</param>
+        </member>
+        <member name="M:HomeFileOrganizer.Managers.FileManager.AddFile(System.String,HomeFileOrganizer.Classes.Category)">
+            <summary>
+            Add from this device to application data.
+            </summary>
+            <param name="path">System path od adding file.</param>
+            <param name="category">Category of file</param>
+            <returns></returns>
+        </member>
+        <member name="M:HomeFileOrganizer.Managers.FileManager.PathChanged(System.String,System.String,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="oldAppTreePath"></param>
+            <param name="newAppTreePath"></param>
+            <param name="removeOld"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HomeFileOrganizer.Managers.FileManager.GetLocalDeviceInstance">
+            <summary>
+            Get <see cref="T:HomeFileOrganizer.Classes.MyDevice"/> representing this device from <see cref="P:HomeFileOrganizer.Managers.FileManager.dataHolder"/>.
+            </summary>
+        </member>
+        <member name="M:HomeFileOrganizer.Managers.FileManager.GetDiskInstance(System.IO.FileInfo)">
+            <summary>
+            Get <see cref="T:HomeFileOrganizer.Classes.MyDisk"/> (from <see cref="P:HomeFileOrganizer.Managers.FileManager.dataHolder"/>) representing disk where file is located.
+            </summary>
+        </member>
+        <member name="M:HomeFileOrganizer.Managers.FileManager.GetDiskId(System.IO.DirectoryInfo)">
+            <summary>
+            Get application id of disk on this device, where the <paramref name="dir"/> is located.
+            Should be found in root folder of disk, in file .HFO.info
+            </summary>
+            <returns>Id of disk</returns>
+        </member>
+        <member name="M:HomeFileOrganizer.Managers.FileManager.GetDiskInstance(System.IO.DirectoryInfo)">
+            <summary>
+            As <see cref="M:HomeFileOrganizer.Managers.FileManager.GetDiskId(System.IO.DirectoryInfo)"/>, only extended about selecting <see cref="T:HomeFileOrganizer.Classes.MyDisk"/> instance form <see cref="P:HomeFileOrganizer.Managers.FileManager.dataHolder"/> by id.
+            </summary>
+        </member>
+        <member name="M:HomeFileOrganizer.Managers.FileManager.InfoSave(System.Windows.Forms.Control[],System.String)">
+            <summary>
+            Take all controls of info data, select these which has changed, add to sync manager syncEvent and rewrite InfoFile
+            </summary>
+            <param name="editetInformations">All controls, that can be changed</param>
+            <param name="file">Path of file in application data tree</param>
+            <returns>Running task</returns>
+        </member>
+        <member name="M:HomeFileOrganizer.Managers.FileManager.GetPathEnd(System.String)">
+            <summary>
+            Go down through my system tree and get Folder(or File) at the end of path <paramref name="s"/>
+            </summary>
+            <returns>Running task thats result is founded Folder(or File).</returns>
+        </member>
+        <member name="M:HomeFileOrganizer.Managers.FileManager.RewriteInfoFile(HomeFileOrganizer.Classes.MyInfoFile,System.String)">
+            <summary>
+            Rewrite info file<paramref name="infoFilePath"/> by data in <paramref name="file"/>.
+            </summary>
+            <param name="infoFilePath">Path relative from <see cref="F:HomeFileOrganizer.Managers.FileManager.PathToHFOFolder"/></param>
+        </member>
+        <member name="M:HomeFileOrganizer.Managers.FileManager.CreateNewFile(System.IO.DirectoryInfo,System.String)">
+            <summary>
+            Create new file in directory with random name.
+            Not override any other file in folder.
+            </summary>
+            <param name="dir">Directory where it should be created</param>
+            <param name="extension">Extension of file name</param>
+            <returns>new file</returns>
+        </member>
+        <member name="M:HomeFileOrganizer.Managers.FileManager.GetDiskPath(HomeFileOrganizer.Classes.MyDisk)">
+            <summary>
+            Get system path of disk.
+            </summary>
+            <param name="Disk"></param>
+            <returns>null if not in this device</returns>
+        </member>
+        <member name="M:HomeFileOrganizer.Managers.FileManager.SaveStructure">
+            <summary>
+            Rewrite overview file and all device files
+            </summary>
+            <returns> Task that is waiting for all data to save.</returns>
+        </member>
+        <member name="M:HomeFileOrganizer.Managers.FileManager.AddNewDevice(System.String)">
+            <summary>
+            Add new device that represent this device. And add local drives.
+            </summary>
+        </member>
+        <member name="M:HomeFileOrganizer.Managers.FileManager.AddLocalDiskToManager(HomeFileOrganizer.Classes.MyDevice)">
+            <summary>
+            Add to application local drives, and create .HFO.info in each.
+            </summary>
+        </member>
+        <member name="M:HomeFileOrganizer.Managers.FileManager.CreateHFOStructure">
+            <summary>
+            Create directory structure in <see cref="F:HomeFileOrganizer.Managers.FileManager.PathToHFOFolder"/>.
+            </summary>
+        </member>
+        <member name="M:HomeFileOrganizer.Managers.FileManager.Dispose">
+            <summary>
+            Close all resources.
+            </summary>
+            <returns>Running task that finish when all work is done.</returns>
+        </member>
+        <member name="F:HomeFileOrganizer.TargetDeviceSelect.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:HomeFileOrganizer.TargetDeviceSelect.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:HomeFileOrganizer.TargetDeviceSelect.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:HomeFileOrganizer.Program.Main">
+            <summary>
+            The main entry point for the application.
+            </summary>
+        </member>
+        <member name="F:HomeFileOrganizer.SimpleFile.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:HomeFileOrganizer.SimpleFile.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:HomeFileOrganizer.SimpleFile.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:HomeFileOrganizer.UserDialog.UserName">
+            <summary>
+            User login name, used tu discover network
+            </summary>
+        </member>
+        <member name="F:HomeFileOrganizer.UserDialog.PCName">
+            <summary>
+            Name of this pc to add to network
+            </summary>
+        </member>
+        <member name="F:HomeFileOrganizer.UserDialog.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:HomeFileOrganizer.UserDialog.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:HomeFileOrganizer.UserDialog.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:HomeFileOrganizer.XMLProcessors.XmlReaders.readFileInfo(System.String,System.UInt64)">
+            <summary>
+            Read information about file to instance of MyFileInfo
+            </summary>
+            <param name="filePath">file with information about file (full path)</param>
+            <param name="diskId">id of this where is this file</param>
+            <returns>MyFileInfo with readet information, or null if file does not exists</returns>
+        </member>
+        <member name="M:HomeFileOrganizer.XMLProcessors.XmlReaders.readDeviceFile(System.String,HomeFileOrganizer.Classes.MyDevice)">
+            <summary>
+            Read information from device info file to instance of DeviceInfo
+            </summary>
+            <exception cref="T:HomeFileOrganizer.Exceptions.DeviceFileException"></exception>
+            <param name="file"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HomeFileOrganizer.XMLProcessors.XmlReaders.readOverview(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="file">file path, only file name</param>
+            <returns></returns>
+        </member>
+        <member name="M:HomeFileOrganizer.XMLProcessors.XmlReaders.selectCategory(System.String)">
+            <summary>
+            Select category from categories, if present.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HomeFileOrganizer.XMLProcessors.XmlReaders.readTemplate(System.String,HomeFileOrganizer.Classes.MyInfoFile,System.UInt64)">
+            <summary>
+            
+            </summary>
+            <param name="templateFile"></param>
+            <param name="file"></param>
+            <param name="diskId">realative path to files ItemFiles folder</param>
+        </member>
+        <member name="M:HomeFileOrganizer.XMLProcessors.XmlSyncFile.readSyncFile(System.IO.TextReader)">
+            <summary>
+            read events from sync file
+            </summary>
+            <param name="fileFullLocalPath"></param>
+            <returns>key value pair ther key is version of sync file and value is list of events</returns>
+        </member>
+        <member name="T:HomeFileOrganizer.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:HomeFileOrganizer.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:HomeFileOrganizer.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:HomeFileOrganizer.Properties.Resources.Categories">
+             <summary>
+               Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
+            &lt;categories&gt;
+              &lt;category name=&quot;Films&quot;&gt;
+                &lt;template temp=&quot;FilmInfo.xml&quot; folder=&quot;false&quot; file=&quot;true&quot;/&gt;
+                &lt;template temp=&quot;MyStatistics.xml&quot; folder=&quot;false&quot; file=&quot;true&quot;/&gt;
+              &lt;/category&gt;
+              &lt;category name=&quot;Serials&quot;&gt;
+                &lt;template temp=&quot;SerialInfo.xml&quot; folder=&quot;true&quot; file=&quot;true&quot;/&gt;
+                &lt;template temp=&quot;EpisodeInfo.xml&quot; folder=&quot;false&quot; file=&quot;true&quot;/&gt;
+                &lt;template temp=&quot;MyStatistics.xml&quot; folder=&quot;false&quot; file=&quot;true&quot;/&gt;
+              &lt;/category&gt;
+            &lt;/categories&gt;.
+             </summary>
+        </member>
+        <member name="P:HomeFileOrganizer.Properties.Resources.EpisodeInfo">
+             <summary>
+               Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
+            &lt;info&gt;
+              &lt;group name=&quot;Episode info&quot;&gt;
+                &lt;value name=&quot;Name EN&quot; type=&quot;text&quot; default=&quot;none&quot;/&gt;
+                &lt;value name=&quot;Name CZ&quot; type=&quot;text&quot; default=&quot;none&quot;/&gt;
+                &lt;value name=&quot;Original name&quot; type=&quot;text&quot; default=&quot;none&quot;/&gt;
+              &lt;/group&gt;
+            &lt;/info&gt;.
+             </summary>
+        </member>
+        <member name="P:HomeFileOrganizer.Properties.Resources.FilmInfo">
+             <summary>
+               Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
+            &lt;info&gt;
+              &lt;group name=&quot;Film info&quot;&gt;
+                &lt;value name=&quot;Name EN&quot; type=&quot;text&quot; default=&quot;none&quot;/&gt;
+                &lt;value name=&quot;Name CZ&quot; type=&quot;text&quot; default=&quot;none&quot;/&gt;
+                &lt;value name=&quot;Name origin&quot; type=&quot;text&quot; default=&quot;none&quot;/&gt;
+                &lt;value name=&quot;Release date&quot; type=&quot;date&quot; default=&quot;1/1/2000&quot;/&gt;
+                &lt;value name=&quot;IMDb&quot; type=&quot;link&quot; default=&quot;none&quot;/&gt;
+                &lt;value name=&quot;CSFD&quot; type=&quot;link&quot; default=&quot;none&quot;/&gt;
+                &lt;value name=&quot;Rating&quot; type=&quot;rating&quot; default=&quot;3&quot;/&gt;
+                &lt;value name=&quot;Story&quot; type=&quot;multilin [rest of string was truncated]&quot;;.
+             </summary>
+        </member>
+        <member name="P:HomeFileOrganizer.Properties.Resources.MyStatistics">
+             <summary>
+               Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
+            &lt;info&gt;
+              &lt;group name=&quot;Statistics&quot;&gt;
+                &lt;value name=&quot;Open&quot; type=&quot;counter&quot; default=&quot;0(1/1/2000)&quot;/&gt;
+              &lt;/group&gt;
+            &lt;/info&gt;.
+             </summary>
+        </member>
+        <member name="P:HomeFileOrganizer.Properties.Resources.SerialInfo">
+             <summary>
+               Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
+            &lt;info&gt;
+              &lt;group name=&quot;Serial info&quot;&gt;
+                &lt;value name=&quot;Name EN&quot; type=&quot;text&quot; default=&quot;none&quot;/&gt;
+                &lt;value name=&quot;Name CZ&quot; type=&quot;text&quot; default=&quot;none&quot;/&gt;
+                &lt;value name=&quot;Name origin&quot; type=&quot;text&quot; default=&quot;none&quot;/&gt;
+                &lt;value name=&quot;Release date&quot; type=&quot;date&quot; default=&quot;1/1/2000&quot;/&gt;
+                &lt;value name=&quot;IMDb&quot; type=&quot;link&quot; default=&quot;none&quot;/&gt;
+                &lt;value name=&quot;CSFD&quot; type=&quot;link&quot; default=&quot;none&quot;/&gt;
+                &lt;value name=&quot;Rating&quot; type=&quot;rating&quot; default=&quot;3&quot;/&gt;
+                &lt;value name=&quot;Story&quot; type=&quot;multil [rest of string was truncated]&quot;;.
+             </summary>
+        </member>
+        <member name="P:HomeFileOrganizer.Properties.Resources.String1">
+            <summary>
+              Looks up a localized string similar to a.
+            </summary>
+        </member>
+        <member name="P:HomeFileOrganizer.Properties.Resources.System">
+             <summary>
+               Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
+            &lt;info&gt;
+              &lt;group name=&quot;system&quot;&gt;
+                &lt;value name=&quot;name&quot; type=&quot;text&quot; default=&quot;&quot;/&gt;
+                &lt;value name=&quot;size&quot; type=&quot;byte&quot; default=&quot;0&quot;/&gt;
+                &lt;value name=&quot;last change&quot; type=&quot;date&quot; default=&quot;1/1/2000&quot;/&gt;
+                &lt;value name=&quot;creation&quot; type=&quot;date&quot; default=&quot;1/1/2000&quot;/&gt;
+              &lt;/group&gt;
+            &lt;/info&gt;.
+             </summary>
+        </member>
+    </members>
+</doc>

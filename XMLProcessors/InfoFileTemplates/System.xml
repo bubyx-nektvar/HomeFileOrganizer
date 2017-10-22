@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+  <group name="system">
+    <value name="name" type="text" default=""/>
+    <value name="size" type="byte" default="0"/>
+    <value name="last change" type="date" default="1/1/2000"/>
+    <value name="creation" type="date" default="1/1/2000"/>
+  </group>
+</info>

@@ -1,0 +1,227 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{06F3BCD3-2626-4099-9442-DD6C21D8BDAD}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>HomeFileOrganizer</RootNamespace>
+    <AssemblyName>HomeFileOrganizer</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\HomeFileOrganizer.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>false</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Classes\Category.cs" />
+    <Compile Include="Classes\Communicator.cs" />
+    <Compile Include="Classes\HomeData.cs" />
+    <Compile Include="Classes\Interfaces\IInfoGetter.cs" />
+    <Compile Include="Classes\ItemTypes\ByteItem.cs" />
+    <Compile Include="Classes\ItemTypes\CounterItem.cs" />
+    <Compile Include="Classes\ItemTypes\DateItem.cs" />
+    <Compile Include="Classes\ItemTypes\LinkItem.cs" />
+    <Compile Include="Classes\ItemTypes\MultilineItem.cs" />
+    <Compile Include="Classes\ItemTypes\NumberItem.cs" />
+    <Compile Include="Classes\ItemTypes\PictureItem.cs" />
+    <Compile Include="Classes\ItemTypes\Rating.cs" />
+    <Compile Include="Classes\ItemTypes\TextItem.cs" />
+    <Compile Include="Classes\MyDisk.cs" />
+    <Compile Include="Classes\MyFile.cs" />
+    <Compile Include="Classes\MyDevice.cs" />
+    <Compile Include="Classes\MyFolder.cs" />
+    <Compile Include="Classes\MyRootFolder.cs" />
+    <Compile Include="GUI\Closer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\Closer.Designer.cs">
+      <DependentUpon>Closer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Exceptions\CategoryException.cs" />
+    <Compile Include="Exceptions\DeviceFileException.cs" />
+    <Compile Include="Exceptions\DeviceSystemException.cs" />
+    <Compile Include="Exceptions\ProtocolException.cs" />
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Managers\Connections.cs" />
+    <Compile Include="Managers\Searcher.cs" />
+    <Compile Include="Managers\SyncEvents\DiskAddEv.cs" />
+    <Compile Include="Managers\SyncEvents\FileAddEv.cs" />
+    <Compile Include="Managers\SyncEvents\InfoChangeValueEv.cs" />
+    <Compile Include="Managers\SyncEvents\ConfirmEvents.cs" />
+    <Compile Include="Managers\SyncEvents\DeviceAddEv.cs" />
+    <Compile Include="Managers\SyncEvents\Events.cs" />
+    <Compile Include="Managers\SyncEvents\FilesEvents.cs" />
+    <Compile Include="Managers\SyncEvents\FileDeleteEv.cs" />
+    <Compile Include="Managers\SyncEvents\FileMovedEv.cs" />
+    <Compile Include="Managers\SyncEvents\InfoChangeEvents.cs" />
+    <Compile Include="Managers\SyncEvents\FileMoveEv.cs" />
+    <Compile Include="Managers\SyncEvents\FileRemoveEvent.cs" />
+    <Compile Include="Managers\Synchronization.cs" />
+    <Compile Include="Managers\FileManager.cs" />
+    <Compile Include="GUI\DeviceNode.cs" />
+    <Compile Include="GUI\DiskNode.cs" />
+    <Compile Include="GUI\FileItem.cs" />
+    <Compile Include="GUI\FolderNode.cs" />
+    <Compile Include="GUI\IGetChilds.cs" />
+    <Compile Include="GUI\TargetDeviceSelect.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\TargetDeviceSelect.Designer.cs">
+      <DependentUpon>TargetDeviceSelect.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Classes\MyFileInfo.cs" />
+    <Compile Include="GUI\SimpleFile.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\SimpleFile.Designer.cs">
+      <DependentUpon>SimpleFile.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\UserDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\UserDialog.Designer.cs">
+      <DependentUpon>UserDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="XMLProcessors\ElementBuilder.cs" />
+    <Compile Include="XMLProcessors\XmlCreator.cs" />
+    <Compile Include="XMLProcessors\XmlReaders.cs" />
+    <Compile Include="XMLProcessors\XmlSyncFile.cs" />
+    <EmbeddedResource Include="GUI\Closer.resx">
+      <DependentUpon>Closer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\TargetDeviceSelect.resx">
+      <DependentUpon>TargetDeviceSelect.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="GUI\SimpleFile.resx">
+      <DependentUpon>SimpleFile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\UserDialog.resx">
+      <DependentUpon>UserDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="ClassDiagram1.cd" />
+    <None Include="Properties\app.manifest">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Enumerations\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="XMLProcessors\InfoFileTemplates\EpisodeInfo.xml" />
+    <Content Include="XMLProcessors\InfoFileTemplates\System.xml" />
+    <Content Include="XMLProcessors\InfoFileTemplates\FilmInfo.xml" />
+    <Content Include="XMLProcessors\InfoFileTemplates\SerialInfo.xml" />
+    <Content Include="XMLProcessors\InfoFileTemplates\MyStatistics.xml" />
+    <Content Include="XMLProcessors\MainFiles\Categories.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5.1">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5.1 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

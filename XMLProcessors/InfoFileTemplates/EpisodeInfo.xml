@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+  <group name="Episode info">
+    <value name="Name EN" type="text" default="none"/>
+    <value name="Name CZ" type="text" default="none"/>
+    <value name="Original name" type="text" default="none"/>
+  </group>
+</info>

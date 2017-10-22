@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<categories>
+  <category name="Films">
+    <template temp="FilmInfo.xml" folder="false" file="true"/>
+    <template temp="MyStatistics.xml" folder="false" file="true"/>
+  </category>
+  <category name="Serials">
+    <template temp="SerialInfo.xml" folder="true" file="true"/>
+    <template temp="EpisodeInfo.xml" folder="false" file="true"/>
+    <template temp="MyStatistics.xml" folder="false" file="true"/>
+  </category>
+</categories>

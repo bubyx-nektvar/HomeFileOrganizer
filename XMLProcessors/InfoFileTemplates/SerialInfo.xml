@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+  <group name="Serial info">
+    <value name="Name EN" type="text" default="none"/>
+    <value name="Name CZ" type="text" default="none"/>
+    <value name="Name origin" type="text" default="none"/>
+    <value name="Release date" type="date" default="1/1/2000"/>
+    <value name="IMDb" type="link" default="none"/>
+    <value name="CSFD" type="link" default="none"/>
+    <value name="Rating" type="rating" default="3"/>
+    <value name="Story" type="multiline" default=""/>
+    <value name="Genre" type="text" default="none"/>
+    <value name="Picture" type="picture" default="none"/>
+    <value name="TV station" type="text" default="none"/>
+
+    <group name="Main actors">
+      <value name="Name" type="text" default="none"/>
+    </group>
+    <group name="Writers">
+      <value name="Name" type="text" default="none"/>
+    </group>
+    <group name="Directors">
+      <value name="Name" type="text" default="none"/>
+    </group>
+  </group>
+</info>

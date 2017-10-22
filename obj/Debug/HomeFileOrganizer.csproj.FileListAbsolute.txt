@@ -1,0 +1,14 @@
+C:\Users\Bubyx\Documents\Visual Studio 2013\Projects\HomeFileOrganizer\HomeFileOrganizer\bin\Debug\HomeFileOrganizer.exe.config
+C:\Users\Bubyx\Documents\Visual Studio 2013\Projects\HomeFileOrganizer\HomeFileOrganizer\bin\Debug\HomeFileOrganizer.XML
+C:\Users\Bubyx\Documents\Visual Studio 2013\Projects\HomeFileOrganizer\HomeFileOrganizer\bin\Debug\HomeFileOrganizer.exe
+C:\Users\Bubyx\Documents\Visual Studio 2013\Projects\HomeFileOrganizer\HomeFileOrganizer\bin\Debug\HomeFileOrganizer.pdb
+C:\Users\Bubyx\Documents\Visual Studio 2013\Projects\HomeFileOrganizer\HomeFileOrganizer\obj\Debug\HomeFileOrganizer.Closer.resources
+C:\Users\Bubyx\Documents\Visual Studio 2013\Projects\HomeFileOrganizer\HomeFileOrganizer\obj\Debug\HomeFileOrganizer.Form1.resources
+C:\Users\Bubyx\Documents\Visual Studio 2013\Projects\HomeFileOrganizer\HomeFileOrganizer\obj\Debug\HomeFileOrganizer.TargetDeviceSelect.resources
+C:\Users\Bubyx\Documents\Visual Studio 2013\Projects\HomeFileOrganizer\HomeFileOrganizer\obj\Debug\HomeFileOrganizer.Properties.Resources.resources
+C:\Users\Bubyx\Documents\Visual Studio 2013\Projects\HomeFileOrganizer\HomeFileOrganizer\obj\Debug\HomeFileOrganizer.SimpleFile.resources
+C:\Users\Bubyx\Documents\Visual Studio 2013\Projects\HomeFileOrganizer\HomeFileOrganizer\obj\Debug\HomeFileOrganizer.UserDialog.resources
+C:\Users\Bubyx\Documents\Visual Studio 2013\Projects\HomeFileOrganizer\HomeFileOrganizer\obj\Debug\HomeFileOrganizer.csproj.GenerateResource.Cache
+C:\Users\Bubyx\Documents\Visual Studio 2013\Projects\HomeFileOrganizer\HomeFileOrganizer\obj\Debug\HomeFileOrganizer.exe
+C:\Users\Bubyx\Documents\Visual Studio 2013\Projects\HomeFileOrganizer\HomeFileOrganizer\obj\Debug\HomeFileOrganizer.pdb
+C:\Users\Bubyx\Documents\Visual Studio 2013\Projects\HomeFileOrganizer\HomeFileOrganizer\obj\Debug\HomeFileOrganizer.csprojResolveAssemblyReference.cache
